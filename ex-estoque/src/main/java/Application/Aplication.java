@@ -1,4 +1,4 @@
-package aplication;
+package Application;
 
 import entities.Products;
 
