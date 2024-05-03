@@ -34,19 +34,14 @@ public class Application {
 
         System.out.println("Enter order date");
         System.out.print("Status: ");
-        String status = scan.next();
-        OrderStatus.valueOf(status);
+        OrderStatus status = OrderStatus.valueOf(scan.next());
+        Order order1 = new Order(client1 ,new Date(), status);
 
         System.out.print("How many items to this order? ");
         int manyItems = scan.nextInt();
 
-        Order order1 = new Order(client1);
 
-        System.out.println(order1.getMoment());
         for (int i = 0; i < manyItems ; i++) {
-            if(order1.getMoment() == null){
-                order1.setMoment(new Date());
-        }
             System.out.println("Enter #" + (i + 1) + " item data: ");
             System.out.print("Product name: ");
             String productName = scan.next();

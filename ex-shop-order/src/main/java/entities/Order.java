@@ -10,11 +10,9 @@ import java.util.List;
 
 
 public class Order {
-    private Date moment;
-
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-
+    private Date moment;
     private OrderStatus status;
     private Client client;
 
@@ -24,8 +22,10 @@ public class Order {
 
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    public Order(Client client) {
+    public Order(Client client, Date moment, OrderStatus status) {
         this.client = client;
+        this.moment = moment;
+        this.status = status;
     }
 
     public Order(OrderStatus status, Date moment, Client client) {
