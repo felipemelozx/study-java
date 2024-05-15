@@ -1,12 +1,17 @@
 package application;
 
-import DataBase.DB;
+import model.dao.DaoFactory;
+import model.dao.SellerDao;
+import model.entities.Department;
+import model.entities.Seller;
 
-import java.sql.Connection;
+import java.util.Date;
+
 
 public class Program {
     public static void main(String[] args) {
-        Connection conn = DB.getConnection();
-        DB.closeConnection();
+        SellerDao sellerDao = DaoFactory.createSellerDao();
+        Seller seller = sellerDao.findById(1);
+        System.out.println(seller);
     }
 }
