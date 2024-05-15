@@ -5,13 +5,23 @@ import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
-import java.util.Date;
+import java.util.List;
 
 
 public class Program {
     public static void main(String[] args) {
         SellerDao sellerDao = DaoFactory.createSellerDao();
-        Seller seller = sellerDao.findById(1);
+
+
+        System.out.println("=== test 1: Seller findById ===");
+        Seller seller = sellerDao.findById(2);
         System.out.println(seller);
+
+        System.out.println("=== test 2: Seller findByDepartment ===");
+        Department department = new Department(null, 1);
+        List<Seller> sellerList = sellerDao.findByDepartment(department);
+        for (Seller selle : sellerList){
+            System.out.println(selle);
+        }
     }
 }
