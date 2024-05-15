@@ -18,7 +18,7 @@ import java.util.Map;
 
 
 public class SellerDaoJDBC implements SellerDao {
-    private Connection conn;
+    private final Connection conn;
 
     public SellerDaoJDBC(Connection conn){
         this.conn = conn;
@@ -39,7 +39,25 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement statement = null;
+        int rowsUpdate;
 
+            try {
+                statement = conn.prepareStatement(
+                        "DELETE FROM seller WHERE Id = ?"
+                );
+                statement.setInt(1, id);
+                rowsUpdate = statement.executeUpdate();
+                if(rowsUpdate > 0){
+                    System.out.println("Deleted!");
+                }else {
+                    System.out.println("ID NOT FOUND.");
+                }
+            }catch (SQLException e){
+                throw  new DbException(e.getMessage());
+            }finally {
+                DB.closeStatement(statement);
+            }
     }
 
     @Override
@@ -129,6 +147,36 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public List<Seller> findAll() {
-        return List.of();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+
+            statement = conn.prepareStatement(
+                    "SELECT seller.*,department.Name as DepName "
+                    + "From seller INNER JOIN department "
+                    + "ON seller.DepartmentId = department.Id "
+                    + "ORDER BY Name"
+            );
+
+            rs = statement.executeQuery();
+
+            List<Seller> sellerList = new ArrayList<>();
+            Map<Integer, Department> map = new HashMap<>();
+
+            while (rs.next()) {
+
+                Department dep = map.get(rs.getInt("DepartmentId"));
+                if(dep == null){
+                    dep = instantiateDepartment(rs);
+                    map.put(rs.getInt("DepartmentId"), dep);
+                }
+                Seller obj = instantiateSeller(dep, rs);
+                sellerList.add(obj);
+            }
+            return  sellerList;
+        } catch (SQLException e ){
+            throw new DbException(e.getMessage());
+        }
+
     }
 }

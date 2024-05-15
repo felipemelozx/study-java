@@ -22,6 +22,18 @@ public class Program {
         List<Seller> sellerList = sellerDao.findByDepartment(department);
         for (Seller selle : sellerList){
             System.out.println(selle);
+            System.out.println();
         }
+
+        System.out.println("=== test 3: Seller findByDepartment ===");
+        List<Seller> sellerAllList = sellerDao.findAll();
+        for (Seller selle : sellerAllList){
+            System.out.println(selle);
+            System.out.println();
+        }
+
+        System.out.println("=== test 3: Seller findByDepartment ===");
+        sellerDao.deleteById(13);
+
     }
 }
