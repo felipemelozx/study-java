@@ -9,10 +9,13 @@ import model.entities.Seller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Program {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         /*
         SellerDao sellerDao = DaoFactory.createSellerDao();
 
@@ -76,6 +79,14 @@ public class Program {
         List<Department> departmentList = departmentDao.findAll();
         for(Department d : departmentList){
             System.out.println(d);
+            System.out.println();
         }
+
+        System.out.println("=== test 5: Department Deleted ===");
+        System.out.println("Enter the Id for delete department.");
+        departmentDao.deleteById(sc.nextInt());
+        System.out.println();
+
+        sc.close();
     }
 }
