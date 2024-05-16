@@ -5,6 +5,7 @@ import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,6 +35,11 @@ public class Program {
 
         System.out.println("=== test 3: Seller findByDepartment ===");
         sellerDao.deleteById(13);
+        System.out.println();
 
+        System.out.println("=== test 4: Seller findByDepartment ===");
+        Seller newSeller = new Seller(null, "Felipe", "felipe@gmail.com", new Date(), 2500.0, department);
+        sellerDao.insert(newSeller);
+        System.out.println(newSeller.getId());
     }
 }
