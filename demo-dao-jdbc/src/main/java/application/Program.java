@@ -70,6 +70,12 @@ public class Program {
         System.out.println("=== test 3: Department Update ===");
         Department dep = new Department("Tech", 1);
         departmentDao.update(dep);
+        System.out.println();
 
+        System.out.println("=== test 4: Department FindAll ===");
+        List<Department> departmentList = departmentDao.findAll();
+        for(Department d : departmentList){
+            System.out.println(d);
+        }
     }
 }
