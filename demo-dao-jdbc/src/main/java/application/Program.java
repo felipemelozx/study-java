@@ -33,13 +33,20 @@ public class Program {
             System.out.println();
         }
 
-        System.out.println("=== test 3: Seller findByDepartment ===");
-        sellerDao.deleteById(13);
+        System.out.println("=== test 3: Seller Deleted ===");
+        sellerDao.deleteById(14);
         System.out.println();
 
         System.out.println("=== test 4: Seller findByDepartment ===");
         Seller newSeller = new Seller(null, "Felipe", "felipe@gmail.com", new Date(), 2500.0, department);
         sellerDao.insert(newSeller);
         System.out.println(newSeller.getId());
+        System.out.println();
+
+
+        newSeller = new Seller(27, "Felipe Melo", "felipemelo@gmail.com", new Date(29/ 4 /2005), 2500.0, department);
+        System.out.println("=== test 5: Seller UPDATE!! ===");
+        sellerDao.update(newSeller);
+        System.out.println();
     }
 }
