@@ -1,7 +1,9 @@
 package application;
 
 import model.dao.DaoFactory;
+import model.dao.DepartmentDao;
 import model.dao.SellerDao;
+import model.dao.impl.DepartmentDaoJDBC;
 import model.entities.Department;
 import model.entities.Seller;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class Program {
     public static void main(String[] args) {
+        /*
         SellerDao sellerDao = DaoFactory.createSellerDao();
 
 
@@ -33,20 +36,40 @@ public class Program {
             System.out.println();
         }
 
-        System.out.println("=== test 3: Seller Deleted ===");
+        System.out.println("=== test 4: Seller Deleted ===");
         sellerDao.deleteById(14);
         System.out.println();
 
-        System.out.println("=== test 4: Seller findByDepartment ===");
+        System.out.println("=== test 5: Seller findByDepartment ===");
         Seller newSeller = new Seller(null, "Felipe", "felipe@gmail.com", new Date(), 2500.0, department);
         sellerDao.insert(newSeller);
         System.out.println(newSeller.getId());
         System.out.println();
 
 
+
         newSeller = new Seller(27, "Felipe Melo", "felipemelo@gmail.com", new Date(29/ 4 /2005), 2500.0, department);
-        System.out.println("=== test 5: Seller UPDATE!! ===");
+        System.out.println("=== test 6: Seller UPDATE!! ===");
         sellerDao.update(newSeller);
         System.out.println();
+        */
+        DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
+
+
+        System.out.println("=== test 1: Department findById ===");
+        Department department = departmentDao.findById(2);
+        System.out.println(department);
+        System.out.println();
+
+        System.out.println("=== test 2: Department Insert ===");
+        Department newDepartment = new Department("youtube", null);
+        departmentDao.insert(newDepartment);
+        System.out.println(newDepartment.getId());
+        System.out.println();
+
+        System.out.println("=== test 3: Department Update ===");
+        Department dep = new Department("Tech", 1);
+        departmentDao.update(dep);
+
     }
 }
